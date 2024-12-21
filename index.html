@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Namoro</title>
+    <style>
+        /* Estilo geral */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ffccd5, #d4f1f4);
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        header {
+            background: #ff6f91;
+            padding: 20px;
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            padding: 20px;
+            position: relative;
+        }
+
+        .molecules {
+            width: 100px;
+            margin: 20px auto;
+            animation: spin 6s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .message {
+            font-size: 1.2em;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1em;
+            color: white;
+            background: #f76e35;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            background: #ff944d;
+        }
+
+        .button.no {
+            background: #e74c3c;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: #34495e;
+            color: white;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                font-size: 1.5em;
+            }
+
+            .molecules {
+                width: 80px;
+            }
+
+            .message {
+                font-size: 1em;
+            }
+
+            .button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Animações de corações */
+        .heart {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: floatUp 3s ease-in infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            left: -10px;
+        }
+
+        .heart::after {
+            top: -10px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-300px) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Andressa, quer namorar comigo?
+    </header>
+    <div class="container">
+        <img class="molecules" src="imagem.jpeg" alt="Molécula">
+        <p class="message">
+            Na tabela periódica da minha vida, você é o elemento mais essencial. <br> 
+            Quando nossos átomos se encontram, a reação é única. <br> 
+            Jesus transformou água em vinho... agora vem transformar meu coração na pessoa mais feliz do mundo! ❤️
+        </p>
+        <div class="buttons">
+            <a class="button" href="#" id="yesButton">Sim</a>
+            <a class="button no" href="#" id="noButton">Não</a>
+        </div>
+    </div>
+    <footer>
+        <p>"Nós somos como átomos, destinados a formar uma ligação perfeita."</p>
+    </footer>
+
+    <script>
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+
+        // Função para criar corações flutuantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        // Gerar contrato de namoro
+        function generateContract() {
+            const date = new Date().toLocaleDateString();
+            const contract = `
+                CONTRATO DE NAMORO
+
+                Eu, Andressa, declaro que aceito namorar com meu parceiro(a), na data de ${date}.
+                Que sejamos felizes e respeitemos este acordo de amor. ❤️
+
+                Assinatura: _________________________
+            `;
+            return encodeURIComponent(contract);
+        }
+
+        // Ação para o botão "Sim"
+        yesButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Mostrar fogos e mensagem
+            const fireworks = document.createElement('div');
+            fireworks.innerHTML = "<h1 style='color: #ff6f91;'>🎉 Parabéns! Você aceitou! 🎉</h1>";
+            fireworks.style.position = 'fixed';
+            fireworks.style.top = '50%';
+            fireworks.style.left = '50%';
+            fireworks.style.transform = 'translate(-50%, -50%)';
+            fireworks.style.zIndex = 1000;
+            fireworks.style.textAlign = 'center';
+            fireworks.style.background = '#fff';
+            fireworks.style.borderRadius = '10px';
+            fireworks.style.padding = '20px';
+            document.body.appendChild(fireworks);
+
+            // Adicionar corações flutuantes
+            for (let i = 0; i < 20; i++) {
+                createHeart();
+            }
+
+            setTimeout(() => fireworks.remove(), 3000);
+
+            // Enviar mensagem no WhatsApp
+            const phoneNumber = "5575982240870"; // Número de telefone em formato internacional
+            const message = encodeURIComponent("Parabéns, Andressa! Você aceitou o pedido de namoro no dia " + new Date().toLocaleDateString() + ". Assine nosso contrato aqui: " + "data:text/plain;charset=utf-8," + generateContract());
+            window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`);
+        });
+
+        // Ação para o botão "Não"
+        noButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const alertBox = document.createElement('div');
+            alertBox.innerHTML = "<h1 style='color: #e74c3c;'>🚫 Pedido recusado? Não é uma opção! 😅</h1>";
+            alertBox.style.position = 'fixed';
+            alertBox.style.top = '50%';
+            alertBox.style.left = '50%';
+            alertBox.style.transform = 'translate(-50%, -50%)';
+            alertBox.style.zIndex = 1000;
+            alertBox.style.textAlign = 'center';
+            alertBox.style.background = '#fff';
+            alertBox.style.borderRadius = '10px';
+            alertBox.style.padding = '20px';
+            document.body.appendChild(alertBox);
+            setTimeout(() => alertBox.remove(), 3000);
+        });
+    </script>
+</body>
+</html>
