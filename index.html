@@ -188,17 +188,18 @@
         // Gerar contrato de namoro
         function generateContract() {
             const date = new Date().toLocaleDateString();
-            const contract = `
-                CONTRATO DE NAMORO
-
-                Eu, Andressa, declaro que aceito namorar com meu parceiro(a), na data de ${date}.
-                Que sejamos felizes e respeitemos este acordo de amor. ❤️
-
-                Assinatura: _________________________
-            `;
-            return encodeURIComponent(contract);
+            return `CONTRATO DE NAMORO\n\nEu, Andressa, declaro que aceito namorar com Esdras, na data de ${date}.\nQue sejamos felizes e respeitemos este acordo de amor. ❤️\n\nAssinatura de Esdras: \n` +
+                "\n    " +
+                "   _esdras_.\n";
         }
 
+        // Baixar contrato como arquivo
+        function downloadContract() {
+            const contractText = generateContract();
+            const blob = new Blob([contractText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            return url;
+        }
         // Ação para o botão "Sim"
         yesButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -226,7 +227,8 @@
 
             // Enviar mensagem no WhatsApp
             const phoneNumber = "5575982240870"; // Número de telefone em formato internacional
-            const message = encodeURIComponent("Parabéns, Andressa! Você aceitou o pedido de namoro no dia " + new Date().toLocaleDateString() + ". Assine nosso contrato aqui: " + "data:text/plain;charset=utf-8," + generateContract());
+            const contractLink = downloadContract();
+            const message = encodeURIComponent(`Parabéns, Andressa! Você aceitou o pedido de namoro no dia ${new Date().toLocaleDateString()}. Baixe nosso contrato aqui: ${contractLink}`);
             window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`);
         });
 
